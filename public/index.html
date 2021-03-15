@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>IA6-5-21</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat"
+      rel="stylesheet"
+      type="text/css"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Lato"
+      rel="stylesheet"
+      type="text/css"
+    />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="main.css" />
+    <script src="App.js"></script>
+    <script src="webcamScript.js"></script>
+  </head>
+
+  <body id="home" data-spy="scroll" data-target=".navbar" data-offset="60">
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button
+            type="button"
+            class="navbar-toggle"
+            data-toggle="collapse"
+            data-target="#myNavbar"
+          >
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#home">Home</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#Demonstration">Demonstration</a></li>
+            <li><a href="#Information">INFORMATION</a></li>
+            <li><a href="#AboutUs">ABOUT US</a></li>
+            <li><a href="#Documentation">DOCUMENTATION</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="jumbotron text-center">
+      <h1>PRH612-1 21V Bacheloroppgave</h1>
+      <p>Level measurement wirh fast.ai and computer vision</p>
+    </div>
+    <div id="Demonstration" class="container-fluid text-center">
+      <h2>Demonstration</h2>
+
+      <span id="errorMsg"></span>
+
+      <div class="row">
+        <div class="column">
+          <p>Take a picture to check the level in the coffee tank:</p>
+          <p></p>
+          <video
+            autoplay="true"
+            ,
+            id="video"
+            ,
+            style="width: 90%; height: auto"
+          ></video>
+          <button id="snap">Take a picture!</button>
+        </div>
+
+        <div class="column">
+          <p>This is the picture:</p>
+          <canvas id="canvas" , style="width: 90%; height: auto"></canvas>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="column">
+          <p>Returning some values: level time etc.</p>
+          <br />
+          <div id="returnMsg"></div>
+          <br />
+        </div>
+
+        <div class="column">
+          <div id="ResultFastai">
+            <p>The result from FastAi</p>
+            <div id="returnPicNew"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="Information" class="container-fluid text-center bg-grey">
+      <h2>Information</h2>
+      <br />
+    </div>
+
+    <div id="AboutUs" class="container-fluid text-center">
+      <h2>About us</h2>
+    </div>
+
+    <div id="Documentation" class="container-fluid text-center bg-grey">
+      <h2>Documentation</h2>
+      <br />
+    </div>
+
+    <footer class="container-fluid text-center">
+      <a href="#home" title="To Top">
+        <span class="glyphicon glyphicon-chevron-up"></span>
+      </a>
+    </footer>
+  </body>
+</html>
