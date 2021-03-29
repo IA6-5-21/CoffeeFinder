@@ -1,7 +1,6 @@
 window.addEventListener("DOMContentLoaded", function() {
     
     
-    
     const snap = document.getElementById("snap");
     const canvas = document.getElementById('canvas');
     const video = document.getElementById('video');
@@ -11,10 +10,11 @@ window.addEventListener("DOMContentLoaded", function() {
 
     const Http = new XMLHttpRequest();
     
+    
     const constraints = {
         audio: false,
         video: {
-            width: 128, height: 96
+            width: 400, height: 300
         }
     };
     
@@ -28,14 +28,13 @@ window.addEventListener("DOMContentLoaded", function() {
     }
     
     function sendPic(d){
-        var newMsg = 'name=testing';
         var msg = `${encodeURIComponent(d)}`;
-        var myobj = {name:"This data was sendt to the function, this is a return loop",image:d};
+        var myobj = {"name":"eirik","image":d};
         // POST TO SELF
         //Http.open('POST','/',true);
-        
         // THIS IS FOR LOCAL TESTING!!!!
         Http.open('POST','http://localhost:7071/api/pythonHttpTrigger',true);
+        //Http.open('POST','http://localhost:80/fastai/predict',true);
         // THIS IS FOR DEPLOYMENT - ONLINE TERSING
         //Http.open('POST','https://coffeetestfunction.azurewebsites.net/api/HttpTrigger_test',true);        
         
@@ -44,9 +43,9 @@ window.addEventListener("DOMContentLoaded", function() {
         Http.send(tmptxt);         
 
     }
-    Http.onreadystatechange = (e) => {
-        console.log('Response:')
-        console.log(Http.responseText)
+    Http.onreadystatechange = () => {
+        //console.log('Response:')
+        //console.log(Http.responseText)
         
         if (Http.readyState === XMLHttpRequest.DONE){
             var status = Http.status;
@@ -56,13 +55,27 @@ window.addEventListener("DOMContentLoaded", function() {
                 var jsonObject = JSON.parse(encoded)
                 var incommingImage = jsonObject.image;
                 var incommingName = jsonObject.name;
+                var incommingLevel= jsonObject.level;
                 
-                document.getElementById('returnMsg').innerHTML = incommingName;
                 if (incommingImage){
                     Base64ToImage(incommingImage,function(img){
-                        document.getElementById('returnPicNew').innerHTML = "";
-                        document.getElementById('returnPicNew').appendChild(img);
-                    
+                        var fastainame = "fastai";
+                        var opencvname = "opencv";
+                        var canvasid = "";
+                       if(incommingName == fastainame)
+                       {
+                           canvasid = "returnPicNew"
+                           document.getElementById('returnMsg').innerHTML = "The level in the tank is:" + incommingLevel;
+                       }
+                       else if(incommingName == opencvname){
+                           canvasid = "returnPicCv"
+                           document.getElementById('returnMsgCV').innerHTML = "The level in the tank is:" + incommingLevel;
+                       }
+                        //document.getElementById('returnPicNew').innerHTML = "";
+                        //document.getElementById('returnPicNew').appendChild(img);
+                        var canvas = document.getElementById(canvasid);
+                        context = canvas.getContext('2d');
+                        context.drawImage(img,0,0,400,300);
                     //  OLD Method
                     //var tmpImg = new Image();
                     //tmpImg.src = encoded;
@@ -91,18 +104,26 @@ window.addEventListener("DOMContentLoaded", function() {
     function handleSuccsess(stream){
         window.stream = stream;
         video.srcObject = stream;
+        
+        
     }
     
     //load init
     init();
     
+
     // Draw Image
     var context = canvas.getContext('2d');
     snap.addEventListener("click", param => {
-        //context.drawImage(video,0,0, 128, 96);
-        context.drawImage(video,0,0, 128,96);
+        context.drawImage(video,0,0,400,300);
         var d = canvas.toDataURL("image/png");
         sendPic(d);
+        // var img = new Image(); //midlertidig
+        // img.src = '95.jpg';
+        // img.onload = function(){context.drawImage(img,0,0,400,300);}
+        // var f = canvas.toDataURL("image/jpeg");
+        // console.log(f)
+        // sendPic(f)
         });
 });
         

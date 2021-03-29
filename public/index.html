@@ -47,7 +47,7 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#Demonstration">Demonstration</a></li>
+            <li><a href="#Demonstration">DEMONSTRATION</a></li>
             <li><a href="#Information">INFORMATION</a></li>
             <li><a href="#AboutUs">ABOUT US</a></li>
             <li><a href="#Documentation">DOCUMENTATION</a></li>
@@ -64,39 +64,47 @@
       <h2>Demonstration</h2>
 
       <span id="errorMsg"></span>
+      <div class="picturecontainer">
+        <div class="centerwrapper">
+          <div class="row">
+            <div class="column">
+              <p>Take a picture to check the level in the coffee tank:</p>
+              <br />
+              <video
+                autoplay="true"
+                ,
+                id="video"
+                width="400"
+                height="300"
+              ></video>
+              <br />
+              <br />
+              <button id="snap">Take a picture!</button>
+            </div>
 
-      <div class="row">
-        <div class="column">
-          <p>Take a picture to check the level in the coffee tank:</p>
-          <p></p>
-          <video
-            autoplay="true"
-            ,
-            id="video"
-            ,
-            style="width: 90%; height: auto"
-          ></video>
-          <button id="snap">Take a picture!</button>
-        </div>
+            <div class="column">
+              <p>Here is the picture that was taken:</p>
+              <br />
+              <canvas id="canvas" width="400" height="300"></canvas>
+            </div>
+          </div>
 
-        <div class="column">
-          <p>This is the picture:</p>
-          <canvas id="canvas" , style="width: 90%; height: auto"></canvas>
-        </div>
-      </div>
+          <div class="row">
+            <div class="column">
+              <p>Machine learning with fast.ai:</p>
+              <br />
+              <p id="returnMsg"></p>
+              <br />
+              <canvas id="returnPicNew" width="400" height="300"> </canvas>
+            </div>
 
-      <div class="row">
-        <div class="column">
-          <p>Returning some values: level time etc.</p>
-          <br />
-          <div id="returnMsg"></div>
-          <br />
-        </div>
-
-        <div class="column">
-          <div id="ResultFastai">
-            <p>The result from FastAi</p>
-            <div id="returnPicNew"></div>
+            <div class="column">
+              <p>Traditional image processing with OpenCV:</p>
+              <br />
+              <p id="returnMsgCV"></p>
+              <br/>
+              <canvas id="returnPicCV" width="400" height="300"> </canvas>
+            </div>
           </div>
         </div>
       </div>
