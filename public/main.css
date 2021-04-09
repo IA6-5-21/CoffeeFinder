@@ -17,6 +17,14 @@ h4 {
   font-weight: 400;
   margin-bottom: 30px;
 }
+
+canvas {
+  display: inline;
+}
+#canvas {
+  text-align: center;
+}
+
 .jumbotron {
   background-color: #f4511e;
   color: #fff;
@@ -25,6 +33,13 @@ h4 {
 }
 .container-fluid {
   padding: 60px 50px;
+}
+.picturecontainer {
+  text-align: center;
+  display: flex;
+}
+.centerwrapper {
+  margin: auto;
 }
 .bg-grey {
   background-color: #f6f6f6;
