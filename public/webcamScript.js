@@ -30,12 +30,13 @@ window.addEventListener("DOMContentLoaded", function() {
     function sendPic(d){
         var msg = `${encodeURIComponent(d)}`;
         var myobj = {"name":"eirik","image":d};
+        //var myobj = {"name":"eirik"};
         // POST TO SELF
         //Http.open('POST','/',true);
         // THIS IS FOR LOCAL TESTING!!!!
-        Http.open('POST','http://localhost:7071/api/pythonHttpTrigger',true);//for azurefunction localy
+        //Http.open('POST','http://localhost:7071/api/pythonHttpTrigger',true);//for azurefunction localy
         //Http.open('POST','http://20.82.252.29/fastai/predict',true);
-        //Http.open('POST','http://localhost:80/fastai/predict',true);
+        Http.open('POST','http://localhost:3000',true);
         // THIS IS FOR DEPLOYMENT - ONLINE TERSING
         //Http.open('POST','https://coffeetestfunction.azurewebsites.net/api/HttpTrigger_test',true);        
         
