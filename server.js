@@ -4,7 +4,7 @@ const app = express()
 var server = http.createServer(app);
 const port = 3000
 var fetch = require('node-fetch');
-const { json } = require('express');
+
 
 let val;
 app.use(express.static('public'))
@@ -12,6 +12,7 @@ app.use(express.static('public'))
 app.get('/', (req, res) => {
   res.send()
 })
+
 app.use(express.json({limit: '50mb'}));
 app.use(express.urlencoded({limit: '50mb'}));
 app.use(express.urlencoded({ extended: true }));
