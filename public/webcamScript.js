@@ -43,7 +43,7 @@ window.addEventListener("DOMContentLoaded", function() {
         Http.setRequestHeader('Content-type', 'application/json');
         var tmptxt = JSON.stringify(myobj)
         Http.send(tmptxt);         
-
+    
     }
     Http.onreadystatechange = () => {
         //console.log('Response:')
@@ -78,6 +78,9 @@ window.addEventListener("DOMContentLoaded", function() {
                         var canvas = document.getElementById(canvasid);
                         context = canvas.getContext('2d');
                         context.drawImage(img,0,0,400,300);
+                        incommingImage = null;
+                        incommingName = null;
+                        incommingLevel = null;
                     //  OLD Method
                     //var tmpImg = new Image();
                     //tmpImg.src = encoded;
@@ -117,6 +120,7 @@ window.addEventListener("DOMContentLoaded", function() {
     // Draw Image
     var context = canvas.getContext('2d');
     snap.addEventListener("click", param => {
+        context.clearRect(0,0,canvas.width,canvas.height);
         context.drawImage(video,0,0,400,300);
         var d = canvas.toDataURL("image/png");
         sendPic(d);
