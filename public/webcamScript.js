@@ -1,14 +1,16 @@
-window.addEventListener("DOMContentLoaded", function () {
+window.addEventListener("DOMContentLoaded", function() {
     const snap = document.getElementById("snap");
     const canvas = document.getElementById('canvas');
     const video = document.getElementById('video');
     const errorMsgElement = document.querySelector('span#errorMsg');
     const Http = new XMLHttpRequest();
+    var incomming = new vetikke();
 
     const constraints = {
         audio: false,
         video: {
-            width: 400, height: 300
+            width: 400,
+            height: 300
         }
     };
 
@@ -34,51 +36,51 @@ window.addEventListener("DOMContentLoaded", function () {
         if (Http.readyState === XMLHttpRequest.DONE) {
             var status = Http.status;
             if (status === 0 || (status >= 200 && status < 400)) {
-
                 var encoded = Http.responseText;
                 var jsonObject = JSON.parse(encoded);
+                for (let i = 1; i >= 0; i--) {
+                    var element = jsonObject[i]
+                    incomming.Image = element.image;
+                    // incomming.Name = element.name;
+                    // incomming.Level = element.level;
 
-                for (let i = 0; i <= jsonObject.length; i++) {
-                    var incommingImage = jsonObject[i].image;
-
-                    if (incommingImage) {
-                        Base64ToImage(incommingImage, function (img) {
+                    if (incomming.Image) {
+                        Base64ToImage(incomming.Image, function(img) {
                             var element = jsonObject[i]
-                            var incommingImage = element.image;
-                            var incommingName = element.name;
-                            var incommingLevel = element.level;
+                            incomming.Image = element.image;
+                            incomming.Name = element.name;
+                            incomming.Level = element.level;
                             var fastainame = "fastai";
                             var opencvname = "opencv";
-                            var canvasid = "returnPicCv";
+                            var canvasid = "";
 
-                            if (incommingName == fastainame) {
+                            if (incomming.Name == fastainame) {
                                 canvasid = "returnPicNew"
-                                document.getElementById('returnMsg').innerHTML = "The level in the tank is:" + incommingLevel;
-                            }
-                            else if (incommingName == opencvname) {
+                                document.getElementById('returnMsg').innerHTML = "The level in the tank is:" + incomming.Level;
+                            } else if (incomming.Name == opencvname) {
                                 canvasid = "returnPicCv"
-                                document.getElementById('returnMsgCV').innerHTML = "The level in the tank is:" + incommingLevel;
+                                document.getElementById('returnMsgCV').innerHTML = "The level in the tank is:" + incomming.Level;
                             }
 
                             var resultCanvas = document.getElementById(canvasid);
                             resultContext = resultCanvas.getContext('2d');
                             resultContext.drawImage(img, 0, 0, 400, 300);
-                            incommingImage = null;
-                            incommingName = null;
-                            incommingLevel = null;
+                            // incomming.Image = null;
+                            // incomming.Name = null;
+                            // incomming.Level = null;
                         });
                     }
                 }
-            }
-            else {
+            } else {
                 document.getElementById('returnPicNew').innerHTML = "Error! Statuscode:  " + status;
                 console.log("Error! Statuscode:  " + status)
             }
         }
     }
+
     function Base64ToImage(base64img, callback) {
         var img = new Image();
-        img.onload = function () {
+        img.onload = function() {
             callback(img);
         };
         img.src = base64img;
@@ -100,3 +102,8 @@ window.addEventListener("DOMContentLoaded", function () {
         sendPic(d);
     });
 });
+class vetikke {
+    static Image;
+    static Name;
+    static Level;
+}
