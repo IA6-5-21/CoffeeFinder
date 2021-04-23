@@ -96,6 +96,8 @@ window.addEventListener("DOMContentLoaded", function() {
     // Draw Image
     var context = canvas.getContext('2d');
     snap.addEventListener("click", param => {
+        document.getElementById('returnMsg').innerHTML = "Calculating level... ";
+        document.getElementById('returnMsgCV').innerHTML = "Calculating level... ";
         context.clearRect(0, 0, canvas.width, canvas.height);
         context.drawImage(video, 0, 0, 400, 300);
         var d = canvas.toDataURL("image/png");
