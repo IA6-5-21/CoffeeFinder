@@ -1,25 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+
+<head>
     <title>IA6-5-21</title>
+    <link rel="shortcut icon" type="image/png" href="Image/LogoIcon.png" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
-    />
-    <link
-      href="https://fonts.googleapis.com/css?family=Montserrat"
-      rel="stylesheet"
-      type="text/css"
-    />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css" />
 
-    <link
-      href="https://fonts.googleapis.com/css?family=Lato"
-      rel="stylesheet"
-      type="text/css"
-    />
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css" />
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -27,107 +19,160 @@
     <link rel="stylesheet" href="main.css" />
     <script src="App.js"></script>
     <script src="webcamScript.js"></script>
-  </head>
+</head>
 
-  <body id="home" data-spy="scroll" data-target=".navbar" data-offset="60">
+<body id="home" data-spy="scroll" data-target=".navbar" data-offset="60">
     <nav class="navbar navbar-default navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button
-            type="button"
-            class="navbar-toggle"
-            data-toggle="collapse"
-            data-target="#myNavbar"
-          >
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#home">Home</a>
+                <a class="navbar-brand" href="#home">Home</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#Demonstration">DEMONSTRATION</a></li>
+                    <li><a href="#Information">INFORMATION</a></li>
+                    <li><a href="#AboutUs">ABOUT US</a></li>
+                    <li><a href="#Documentation">DOCUMENTATION</a></li>
+                </ul>
+            </div>
         </div>
-        <div class="collapse navbar-collapse" id="myNavbar">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#Demonstration">DEMONSTRATION</a></li>
-            <li><a href="#Information">INFORMATION</a></li>
-            <li><a href="#AboutUs">ABOUT US</a></li>
-            <li><a href="#Documentation">DOCUMENTATION</a></li>
-          </ul>
-        </div>
-      </div>
     </nav>
 
     <div class="jumbotron text-center">
-      <h1>PRH612-1 21V Bacheloroppgave</h1>
-      <p>Level measurement wirh fast.ai and computer vision</p>
+        <img src="Image/LogoHomePage.png" alt=" Logo " style="width: 200px; height: auto " />
+        <h1>PRH612-1 21V Bacheloroppgave</h1>
+        <p2>Level measurement wirh fast.ai and computer vision</p2>
     </div>
-    <div id="Demonstration" class="container-fluid text-center">
-      <h2>Demonstration</h2>
 
-      <span id="errorMsg"></span>
-      <div class="picturecontainer">
-        <div class="centerwrapper">
-          <div class="row">
-            <div class="column">
-              <p>Take a picture to check the level in the coffee tank:</p>
-              <br />
-              <video
-                autoplay="true"
-                ,
-                id="video"
-                width="400"
-                height="300"
-              ></video>
-              <br />
-              <br />
-              <button id="snap">Take a picture!</button>
+    <div id="Demonstration" class="container-fluid text-center ">
+        <h2>Demonstration</h2>
+        <span id="errorMsg"></span>
+        <div class="picturecontainer ">
+            <div class="centerwrapper ">
+                <div class="row ">
+                    <div class="column ">
+                        <p2>Take a picture to check the level in the coffee tank:</p2>
+                        <br />
+                        <video autoplay="true " id="video" width="400 " height="300 "></video>
+                        <br />
+                        <br />
+                        <button id="snap">Take a picture!</button>
+                    </div>
+                    <div class="column ">
+                        <p2>Here is the picture that was taken:</p2>
+                        <br />
+                        <canvas id="canvas" width="400 " height="300 "></canvas>
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="column ">
+                        <p2>Machine learning with fast.ai:</p2>
+                        <br />
+                        <p id="returnMsg"></p>
+                        <br />
+                        <canvas id="returnPicNew" width="400 " height="300 "> </canvas>
+                    </div>
+                    <div class="column ">
+                        <p2>Traditional image processing with OpenCV:</p2>
+                        <br/>
+                        <p id="returnMsgCV"></p>
+                        <br/>
+                        <canvas id="returnPicCv" width="400 " height="300 "> </canvas>
+                    </div>
+                </div>
             </div>
-
-            <div class="column">
-              <p>Here is the picture that was taken:</p>
-              <br />
-              <canvas id="canvas" width="400" height="300"></canvas>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="column">
-              <p>Machine learning with fast.ai:</p>
-              <br />
-              <p id="returnMsg"></p>
-              <br />
-              <canvas id="returnPicNew" width="400" height="300"> </canvas>
-            </div>
-
-            <div class="column">
-              <p>Traditional image processing with OpenCV:</p>
-              <br />
-              <p id="returnMsgCV"></p>
-              <br/>
-              <canvas id="returnPicCV" width="400" height="300"> </canvas>
-            </div>
-          </div>
         </div>
-      </div>
     </div>
 
     <div id="Information" class="container-fluid text-center bg-grey">
-      <h2>Information</h2>
-      <br />
+        <div class="row2">
+            <div class="column2">
+                <img src="Image/Universitetet_i_sørøst-Norge_Logo.png" alt="USN" style="width:50%">
+            </div>
+            <div class="column2">
+                <h2>Information</h2>
+            </div>
+            <div class="column2">
+                <img src="Image/BouvetLogo.png " alt="Bouvet" style="width:40%">
+            </div>
+        </div>
+        <br/>
+        <p>
+            We are 4 students who have written a bachelor thesis on level measurement with computer vision, machine learning and traditional image processing. We study at the university in southeastern Norway campus Posrgunn. Bouvet has an in-house coffee project
+            and wanted some students that could help solve a sub-thesis from the coffee project, where we were lucky to be able to use this as our bachelor thesis.
+        </p>
+        <p>
+            The task consists of measuring the level in a coffee tank of a coffee machine, where we will use computer vision, traditional image processing and machine learning. There will be a comparison of both models on this website, where you can see which level
+            gives the most correct answer.
+        </p>
+        <a href="#Demonstration ">Click here to test yourself</a>
+        <p>
+            For the machine learning model, we use the FastAI library and the PyTorch library. With traditional image processing, we use the OpenCV library with Python.
+        </p>
     </div>
 
-    <div id="AboutUs" class="container-fluid text-center">
-      <h2>About us</h2>
+    <div id="AboutUs" class="container-fluid text-center ">
+        <h2>About us</h2>
+        <p>
+            We are four students from the University of Southeast Norway who are taking a bachelor's degree in computer science and automation. Everyone enjoys programming very much and has gained some programming experience during these three years at school. None
+            of us had any particular knowledge of machine learning, traditional image processing or computer vision. It has been a fun challenge to achieve this, where the learning curve has been high.
+        </p>
+        <p>
+            If you want to contact one of us, then you will find where you can contact us below:
+        </p>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Country</th>
+            </tr>
+            <tr>
+                <td>Jørgen Bang Sneisen</td>
+                <td>
+                    <a href="mailto:221950@student.usn.no ">221950@student.usn.no</a>
+                </td>
+                <td>Norway</td>
+            </tr>
+            <tr>
+                <td>Eirik Døble</td>
+                <td>
+                    <a href="mailto:220975@student.usn.no ">220975@student.usn.no</a>
+                </td>
+                <td>Norway</td>
+            </tr>
+            <tr>
+                <td>Sinder Haugseter</td>
+                <td>
+                    <a href="mailto:223789@student.usn.no ">223789@student.usn.no</a>
+                </td>
+                <td>Norway</td>
+            </tr>
+            <tr>
+                <td>Christian Mikkelsen</td>
+                <td>
+                    <a href="mailto:213634@student.usn.no ">213634@student.usn.no</a>
+                </td>
+                <td>Norway</td>
+            </tr>
+        </table>
     </div>
 
     <div id="Documentation" class="container-fluid text-center bg-grey">
-      <h2>Documentation</h2>
-      <br />
+        <h2>Documentation</h2>
+        <p2>A pdf version of the report is shown here:</p2>
+        <iframe src="Pdf/Lorem ipsum.pdf " width="70%" height="1130"> </iframe>
     </div>
 
-    <footer class="container-fluid text-center">
-      <a href="#home" title="To Top">
-        <span class="glyphicon glyphicon-chevron-up"></span>
-      </a>
+    <footer class="container-fluid text-center ">
+        <a href="#home " title="To Top ">
+            <span class="glyphicon glyphicon-chevron-up "></span>
+        </a>
     </footer>
-  </body>
+</body>
+
 </html>
