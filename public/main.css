@@ -25,6 +25,18 @@ h4 {
     margin-bottom: 30px;
 }
 
+p {
+    padding-left: 15%;
+    padding-right: 15%;
+    text-align: left;
+}
+
+p2 {
+    padding-left: 15%;
+    padding-right: 15%;
+    text-align: center;
+}
+
 canvas {
     display: inline;
 }
@@ -97,6 +109,20 @@ footer .glyphicon {
     margin-left: auto;
     margin-right: auto;
     display: block;
+}
+
+#returnMsg {
+    font-family: arial, sans-serif;
+    font-size: 30px;
+    text-align: center;
+    color: #f4511e;
+}
+
+#returnMsgCV {
+    font-family: arial, sans-serif;
+    font-size: 30px;
+    text-align: center;
+    color: #f4511e;
 }
 
 .column {

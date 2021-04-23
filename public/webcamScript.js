@@ -4,7 +4,7 @@ window.addEventListener("DOMContentLoaded", function() {
     const video = document.getElementById('video');
     const errorMsgElement = document.querySelector('span#errorMsg');
     const Http = new XMLHttpRequest();
-    var incomming = new vetikke();
+    var incomming = new DataVariableClass();
 
     const constraints = {
         audio: false,
@@ -26,7 +26,7 @@ window.addEventListener("DOMContentLoaded", function() {
     function sendPic(d) {
         var msg = `${encodeURIComponent(d)}`;
         var myobj = { "name": "Webpage", "image": d };
-        Http.open('POST', 'http://localhost:3000', true);
+        Http.open('POST', '/', true);
         Http.setRequestHeader('Content-type', 'application/json');
         var tmptxt = JSON.stringify(myobj)
         Http.send(tmptxt);
@@ -56,10 +56,10 @@ window.addEventListener("DOMContentLoaded", function() {
 
                             if (incomming.Name == fastainame) {
                                 canvasid = "returnPicNew"
-                                document.getElementById('returnMsg').innerHTML = "The level in the tank is:" + incomming.Level;
+                                document.getElementById('returnMsg').innerHTML = "The level in the tank is: " + incomming.Level + "%";
                             } else if (incomming.Name == opencvname) {
                                 canvasid = "returnPicCv"
-                                document.getElementById('returnMsgCV').innerHTML = "The level in the tank is:" + incomming.Level;
+                                document.getElementById('returnMsgCV').innerHTML = "The level in the tank is: " + incomming.Level + "%";
                             }
 
                             var resultCanvas = document.getElementById(canvasid);
@@ -102,7 +102,7 @@ window.addEventListener("DOMContentLoaded", function() {
         sendPic(d);
     });
 });
-class vetikke {
+class DataVariableClass {
     static Image;
     static Name;
     static Level;
