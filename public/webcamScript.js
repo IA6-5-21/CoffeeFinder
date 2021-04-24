@@ -34,10 +34,27 @@ window.addEventListener("DOMContentLoaded", function() {
         //XMLHttpRequest for opencv
         HttpOpenCv.open('POST', 'https://52.142.127.98/opencv/predict', true);
         HttpOpenCv.setRequestHeader('Content-type', 'application/json');
+        
+        HttpOpenCv.onload = function () {
+            console.log("OPENCV: Certificate accepted OK");
+        };
+        HttpOpenCv.onerror = function () {
+            console.log("OPENCV: Validation error  - Certificate");
+             document.getElementById('returnMsg').innerHTML = "Certificate error: <br> Visit <a href='https://52.142.127.98/' target = '_blank'>https://52.142.127.98/</a>";
+        };
         HttpOpenCv.send(tmptxt);
         //XMLHttpRequest for fastai
         HttpFastai.open('POST', 'https://52.142.127.98/fastai/predict', true);
         HttpFastai.setRequestHeader('Content-type', 'application/json');
+
+        HttpFastai.onload = function () {
+            console.log("FASTAI: Certificate accepted OK");
+        };
+        HttpFastai.onerror = function () {
+            console.log("FASTAI: Validation error  - Certificate");
+             document.getElementById('returnMsg').innerHTML = "Certificate error: <br> Visit <a href='https://52.142.127.98/' target = '_blank'>https://52.142.127.98/</a>";
+
+        };
         HttpFastai.send(tmptxt);
     } 
     //Handler for fastai XMLHttpRequest 
@@ -51,6 +68,7 @@ window.addEventListener("DOMContentLoaded", function() {
             else {
                 document.getElementById('returnPicNew').innerHTML = "Error! Statuscode:  " + status;
                 console.log("Error! Statuscode:  " + status)
+               
             }
         }
     }
