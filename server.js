@@ -30,13 +30,13 @@ server.listen(port, () => {
 function sendApi(body, callback) {
     var test = Promise.all([
             //Sending and recieving data from opencv docker container
-            fetch('http://coffeelevelapi.northeurope.azurecontainer.io/opencv/predict', {
+            fetch('https://52.142.127.98/opencv/predict', {
                 method: 'POST',
                 body: JSON.stringify(body),
                 headers: { 'Constant-Type': 'application/json' },
             }),
             //Sending and recieving data from fastai docker container
-            fetch('http://coffeelevelapi.northeurope.azurecontainer.io/fastai/predict', {
+            fetch('https://52.142.127.98/fastai/predict', {
                 method: 'POST',
                 body: JSON.stringify(body),
                 headers: { 'Constant-Type': 'application/json' },

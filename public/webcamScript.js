@@ -3,8 +3,11 @@ window.addEventListener("DOMContentLoaded", function() {
     const canvas = document.getElementById('canvas');
     const video = document.getElementById('video');
     const errorMsgElement = document.querySelector('span#errorMsg');
-    const Http = new XMLHttpRequest();
+           
     var incomming = new DataVariableClass();
+    //Defining a unique http-data handler for both opencv and fastai 
+    const HttpFastai = new XMLHttpRequest();     
+    const HttpOpenCv = new XMLHttpRequest();
 
     const constraints = {
         audio: false,
@@ -26,55 +29,74 @@ window.addEventListener("DOMContentLoaded", function() {
     function sendPic(d) {
         var msg = `${encodeURIComponent(d)}`;
         var myobj = { "name": "Webpage", "image": d };
-        Http.open('POST', '/', true);
-        Http.setRequestHeader('Content-type', 'application/json');
         var tmptxt = JSON.stringify(myobj)
-        Http.send(tmptxt);
-    }
-
-    Http.onreadystatechange = () => {
-        if (Http.readyState === XMLHttpRequest.DONE) {
-            var status = Http.status;
+        
+        //XMLHttpRequest for opencv
+        HttpOpenCv.open('POST', 'https://52.142.127.98/opencv/predict', true);
+        HttpOpenCv.setRequestHeader('Content-type', 'application/json');
+        HttpOpenCv.send(tmptxt);
+        //XMLHttpRequest for fastai
+        HttpFastai.open('POST', 'https://52.142.127.98/fastai/predict', true);
+        HttpFastai.setRequestHeader('Content-type', 'application/json');
+        HttpFastai.send(tmptxt);
+    } 
+    //Handler for fastai XMLHttpRequest 
+    HttpFastai.onreadystatechange = () => {
+        if (HttpFastai.readyState === XMLHttpRequest.DONE) {
+            var status = HttpFastai.status;
             if (status === 0 || (status >= 200 && status < 400)) {
-                var encoded = Http.responseText;
-                var jsonObject = JSON.parse(encoded);
-                for (let i = 1; i >= 0; i--) {
-                    var element = jsonObject[i]
-                    incomming.Image = element.image;
-                    // incomming.Name = element.name;
-                    // incomming.Level = element.level;
-
-                    if (incomming.Image) {
-                        Base64ToImage(incomming.Image, function(img) {
-                            var element = jsonObject[i]
-                            incomming.Image = element.image;
-                            incomming.Name = element.name;
-                            incomming.Level = element.level;
-                            var fastainame = "fastai";
-                            var opencvname = "opencv";
-                            var canvasid = "";
-
-                            if (incomming.Name == fastainame) {
-                                canvasid = "returnPicNew"
-                                document.getElementById('returnMsg').innerHTML = "The level in the tank is: " + incomming.Level + "%";
-                            } else if (incomming.Name == opencvname) {
-                                canvasid = "returnPicCv"
-                                document.getElementById('returnMsgCV').innerHTML = "The level in the tank is: " + incomming.Level + "%";
-                            }
-
-                            var resultCanvas = document.getElementById(canvasid);
-                            resultContext = resultCanvas.getContext('2d');
-                            resultContext.drawImage(img, 0, 0, 400, 300);
-                            // incomming.Image = null;
-                            // incomming.Name = null;
-                            // incomming.Level = null;
-                        });
-                    }
-                }
-            } else {
+                var encoded1 = HttpFastai.responseText;
+                handledata(encoded1);  // Send jsondata to datahandler function
+            }
+            else {
                 document.getElementById('returnPicNew').innerHTML = "Error! Statuscode:  " + status;
                 console.log("Error! Statuscode:  " + status)
             }
+        }
+    }
+    //Handler for opencv XMLHttpRequest 
+    HttpOpenCv.onreadystatechange = () => {
+        if (HttpOpenCv.readyState === XMLHttpRequest.DONE) {
+            var status = HttpOpenCv.status;
+            if (status === 0 || (status >= 200 && status < 400)) {
+                var encoded2 = HttpOpenCv.responseText;                
+                handledata(encoded2); // Send jsondata to datahandler function
+            }
+            else {
+                document.getElementById('returnPicNew').innerHTML = "Error! Statuscode:  " + status;
+                console.log("Error! Statuscode:  " + status)
+            }
+        }
+    }
+    //prediction data handler input: jsondata
+    function handledata(encoded){
+         
+        var jsonObject = JSON.parse(encoded);
+        var element = jsonObject;
+        incomming.Image = element.image;
+
+        if (incomming.Image) {
+            Base64ToImage(incomming.Image, function(img) {
+                var element = jsonObject;
+                incomming.Image = element.image;
+                incomming.Name = element.name;
+                incomming.Level = element.level;
+                var fastainame = "fastai";
+                var opencvname = "opencv";
+                var canvasid = "";
+
+                if (incomming.Name == fastainame) {
+                    canvasid = "returnPicNew"
+                    document.getElementById('returnMsg').innerHTML = "The level in the tank is: " + incomming.Level + "%";
+                } else if (incomming.Name == opencvname) {
+                    canvasid = "returnPicCv"
+                    document.getElementById('returnMsgCV').innerHTML = "The level in the tank is: " + incomming.Level + "%";
+                }
+
+                var resultCanvas = document.getElementById(canvasid);
+                resultContext = resultCanvas.getContext('2d');
+                resultContext.drawImage(img, 0, 0, 400, 300);                    
+            });
         }
     }
 
