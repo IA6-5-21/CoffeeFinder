@@ -34,7 +34,7 @@ window.addEventListener("DOMContentLoaded", function() {
         var tmptxt = JSON.stringify(myobj)
         
         //XMLHttpRequest for opencv
-        HttpOpenCv.open('POST', 'https://20.73.201.64/opencv/predict', true);
+        HttpOpenCv.open('POST', 'https://20.56.206.114/opencv/predict', true);
         HttpOpenCv.setRequestHeader('Content-type', 'application/json');
         
         HttpOpenCv.onload = function () {
@@ -42,11 +42,11 @@ window.addEventListener("DOMContentLoaded", function() {
         };
         HttpOpenCv.onerror = function () {
             console.log("OPENCV: Validation error  - Certificate");
-             document.getElementById('returnMsg').innerHTML = "Certificate error: <br> Visit <a href='https://20.73.201.64/' target = '_blank'>https://20.73.201.64/</a>";
+             document.getElementById('returnMsg').innerHTML = "Certificate error: <br> Visit <a href='20.56.206.114/' target = '_blank'>https://20.56.206.114/</a>";
         };
         HttpOpenCv.send(tmptxt);
         //XMLHttpRequest for fastai
-        HttpFastai.open('POST', 'https://20.73.201.64/fastai/predict', true);
+        HttpFastai.open('POST', 'https://20.56.206.114/fastai/predict', true);
         HttpFastai.setRequestHeader('Content-type', 'application/json');
 
         HttpFastai.onload = function () {
@@ -54,7 +54,7 @@ window.addEventListener("DOMContentLoaded", function() {
         };
         HttpFastai.onerror = function () {
             console.log("FASTAI: Validation error  - Certificate");
-             document.getElementById('returnMsg').innerHTML = "Certificate error: <br> Visit <a href='https://20.73.201.64/' target = '_blank'>https://20.73.201.64/</a>";
+             document.getElementById('returnMsg').innerHTML = "Certificate error: <br> Visit <a href='https://20.56.206.114/' target = '_blank'>https://20.56.206.114/</a>";
 
         };
         HttpFastai.send(tmptxt);
