@@ -1,6 +1,8 @@
 window.addEventListener("DOMContentLoaded", function() {
     const snap = document.getElementById("snap");
     const canvas = document.getElementById('canvas');
+    const canvasFastAI = document.getElementById('returnPicNew');
+    const canvasOpenCV = document.getElementById('returnPicCv');
     const video = document.getElementById('video');
     const errorMsgElement = document.querySelector('span#errorMsg');
            
@@ -135,9 +137,13 @@ window.addEventListener("DOMContentLoaded", function() {
 
     // Draw Image
     var context = canvas.getContext('2d');
+    var contextFastAI = canvasFastAI.getContext('2d');
+    var contextOpenCV = canvasOpenCV.getContext('2d');
     snap.addEventListener("click", param => {
         document.getElementById('returnMsg').innerHTML = "Calculating level... ";
         document.getElementById('returnMsgCV').innerHTML = "Calculating level... ";
+        contextFastAI.clearRect(0, 0, canvasFastAI.width, canvasFastAI.height);
+        contextOpenCV.clearRect(0, 0, canvasOpenCV.width, canvasOpenCV.height);
         context.clearRect(0, 0, canvas.width, canvas.height);
         context.drawImage(video, 0, 0, 400, 300);
         var d = canvas.toDataURL("image/png");
