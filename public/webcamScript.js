@@ -32,11 +32,11 @@ window.addEventListener("DOMContentLoaded", function() {
         var tmptxt = JSON.stringify(myobj)
         
         //XMLHttpRequest for opencv
-        HttpOpenCv.open('POST', 'https://52.142.127.98/opencv/predict', true);
+        HttpOpenCv.open('POST', 'https://20.73.201.64/opencv/predict', true);
         HttpOpenCv.setRequestHeader('Content-type', 'application/json');
         HttpOpenCv.send(tmptxt);
         //XMLHttpRequest for fastai
-        HttpFastai.open('POST', 'https://52.142.127.98/fastai/predict', true);
+        HttpFastai.open('POST', 'https://20.73.201.64/fastai/predict', true);
         HttpFastai.setRequestHeader('Content-type', 'application/json');
         HttpFastai.send(tmptxt);
     } 
