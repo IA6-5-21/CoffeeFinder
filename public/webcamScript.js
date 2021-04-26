@@ -42,7 +42,7 @@ window.addEventListener("DOMContentLoaded", function() {
         };
         HttpOpenCv.onerror = function () {
             console.log("OPENCV: Validation error  - Certificate");
-             document.getElementById('returnMsg').innerHTML = "Certificate error: <br> Visit <a href='https://52.142.127.98/' target = '_blank'>https://52.142.127.98/</a>";
+             document.getElementById('returnMsg').innerHTML = "Certificate error: <br> Visit <a href='https://20.73.201.64/' target = '_blank'>https://20.73.201.64/</a>";
         };
         HttpOpenCv.send(tmptxt);
         //XMLHttpRequest for fastai
@@ -54,7 +54,7 @@ window.addEventListener("DOMContentLoaded", function() {
         };
         HttpFastai.onerror = function () {
             console.log("FASTAI: Validation error  - Certificate");
-             document.getElementById('returnMsg').innerHTML = "Certificate error: <br> Visit <a href='https://52.142.127.98/' target = '_blank'>https://52.142.127.98/</a>";
+             document.getElementById('returnMsg').innerHTML = "Certificate error: <br> Visit <a href='https://20.73.201.64/' target = '_blank'>https://20.73.201.64/</a>";
 
         };
         HttpFastai.send(tmptxt);
