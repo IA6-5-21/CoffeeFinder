@@ -5,10 +5,10 @@ window.addEventListener("DOMContentLoaded", function() {
     const canvasOpenCV = document.getElementById('returnPicCv');
     const video = document.getElementById('video');
     const errorMsgElement = document.querySelector('span#errorMsg');
-           
+
     var incomming = new DataVariableClass();
     //Defining a unique http-data handler for both opencv and fastai 
-    const HttpFastai = new XMLHttpRequest();     
+    const HttpFastai = new XMLHttpRequest();
     const HttpOpenCv = new XMLHttpRequest();
 
     const constraints = {
@@ -32,65 +32,63 @@ window.addEventListener("DOMContentLoaded", function() {
         var msg = `${encodeURIComponent(d)}`;
         var myobj = { "name": "Webpage", "image": d };
         var tmptxt = JSON.stringify(myobj)
-        
+
         //XMLHttpRequest for opencv
         HttpOpenCv.open('POST', 'https://20.56.206.114/opencv/predict', true);
         HttpOpenCv.setRequestHeader('Content-type', 'application/json');
-        
-        HttpOpenCv.onload = function () {
+
+        HttpOpenCv.onload = function() {
             console.log("OPENCV: Certificate accepted OK");
         };
-        HttpOpenCv.onerror = function () {
+        HttpOpenCv.onerror = function() {
             console.log("OPENCV: Validation error  - Certificate");
-             document.getElementById('returnMsg').innerHTML = "Certificate error: <br> Visit <a href='20.56.206.114/' target = '_blank'>https://20.56.206.114/</a>";
+            document.getElementById('returnMsg').innerHTML = "Certificate error: <br> Visit <a href='20.56.206.114/' target = '_blank'>https://20.56.206.114/</a>";
         };
         HttpOpenCv.send(tmptxt);
         //XMLHttpRequest for fastai
         HttpFastai.open('POST', 'https://20.56.206.114/fastai/predict', true);
         HttpFastai.setRequestHeader('Content-type', 'application/json');
 
-        HttpFastai.onload = function () {
+        HttpFastai.onload = function() {
             console.log("FASTAI: Certificate accepted OK");
         };
-        HttpFastai.onerror = function () {
+        HttpFastai.onerror = function() {
             console.log("FASTAI: Validation error  - Certificate");
-             document.getElementById('returnMsg').innerHTML = "Certificate error: <br> Visit <a href='https://20.56.206.114/' target = '_blank'>https://20.56.206.114/</a>";
+            document.getElementById('returnMsg').innerHTML = "Certificate error: <br> Visit <a href='https://20.56.206.114/' target = '_blank'>https://20.56.206.114/</a>";
 
         };
         HttpFastai.send(tmptxt);
-    } 
+    }
     //Handler for fastai XMLHttpRequest 
     HttpFastai.onreadystatechange = () => {
-        if (HttpFastai.readyState === XMLHttpRequest.DONE) {
-            var status = HttpFastai.status;
-            if (status === 0 || (status >= 200 && status < 400)) {
-                var encoded1 = HttpFastai.responseText;
-                handledata(encoded1);  // Send jsondata to datahandler function
-            }
-            else {
-                document.getElementById('returnPicNew').innerHTML = "Error! Statuscode:  " + status;
-                console.log("Error! Statuscode:  " + status)
-               
+            if (HttpFastai.readyState === XMLHttpRequest.DONE) {
+                var status = HttpFastai.status;
+                if (status === 0 || (status >= 200 && status < 400)) {
+                    var encoded1 = HttpFastai.responseText;
+                    handledata(encoded1); // Send jsondata to datahandler function
+                } else {
+                    document.getElementById('returnPicNew').innerHTML = "Error! Statuscode:  " + status;
+                    console.log("Error! Statuscode:  " + status)
+
+                }
             }
         }
-    }
-    //Handler for opencv XMLHttpRequest 
+        //Handler for opencv XMLHttpRequest 
     HttpOpenCv.onreadystatechange = () => {
-        if (HttpOpenCv.readyState === XMLHttpRequest.DONE) {
-            var status = HttpOpenCv.status;
-            if (status === 0 || (status >= 200 && status < 400)) {
-                var encoded2 = HttpOpenCv.responseText;                
-                handledata(encoded2); // Send jsondata to datahandler function
-            }
-            else {
-                document.getElementById('returnPicNew').innerHTML = "Error! Statuscode:  " + status;
-                console.log("Error! Statuscode:  " + status)
+            if (HttpOpenCv.readyState === XMLHttpRequest.DONE) {
+                var status = HttpOpenCv.status;
+                if (status === 0 || (status >= 200 && status < 400)) {
+                    var encoded2 = HttpOpenCv.responseText;
+                    handledata(encoded2); // Send jsondata to datahandler function
+                } else {
+                    document.getElementById('returnPicNew').innerHTML = "Error! Statuscode:  " + status;
+                    console.log("Error! Statuscode:  " + status)
+                }
             }
         }
-    }
-    //prediction data handler input: jsondata
-    function handledata(encoded){
-         
+        //prediction data handler input: jsondata
+    function handledata(encoded) {
+
         var jsonObject = JSON.parse(encoded);
         var element = jsonObject;
         incomming.Image = element.image;
@@ -108,14 +106,20 @@ window.addEventListener("DOMContentLoaded", function() {
                 if (incomming.Name == fastainame) {
                     canvasid = "returnPicNew"
                     document.getElementById('returnMsg').innerHTML = "The level in the tank is: " + incomming.Level + "%";
+                    if (incomming.Level.toLowerCase() == "error") {
+                        document.getElementById('returnMsg').innerHTML = incomming.Level;
+                    }
                 } else if (incomming.Name == opencvname) {
                     canvasid = "returnPicCv"
                     document.getElementById('returnMsgCV').innerHTML = "The level in the tank is: " + incomming.Level + "%";
+                    if (incomming.Level == "Error") {
+                        document.getElementById('returnMsgCV').innerHTML = incomming.Level;
+                    }
                 }
 
                 var resultCanvas = document.getElementById(canvasid);
                 resultContext = resultCanvas.getContext('2d');
-                resultContext.drawImage(img, 0, 0, 400, 300);                    
+                resultContext.drawImage(img, 0, 0, 400, 300);
             });
         }
     }

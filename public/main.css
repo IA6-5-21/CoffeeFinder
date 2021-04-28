@@ -114,6 +114,8 @@ footer .glyphicon {
     font-size: 30px;
     text-align: center;
     color: #f4511e;
+    padding: 0%;
+    margin: 0%;
 }
 
 #returnMsgCV {
@@ -121,6 +123,8 @@ footer .glyphicon {
     font-size: 30px;
     text-align: center;
     color: #f4511e;
+    padding: 0%;
+    margin: 0%;
 }
 
 .column {
@@ -214,8 +218,8 @@ th {
     padding: 1px;
 }
 
-tr:nth-child(even) {
-    background-color: #ffffff;
+tr {
+    width: 80%;
 }
 
 
