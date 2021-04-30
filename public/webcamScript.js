@@ -106,7 +106,7 @@ window.addEventListener("DOMContentLoaded", function() {
                 if (incomming.Name == fastainame) {
                     canvasid = "returnPicNew"
                     document.getElementById('returnMsg').innerHTML = "The level in the tank is: " + incomming.Level + "%";
-                    if (incomming.Level.toLowerCase() == "error") {
+                    if (incomming.Level.toString().toLowerCase() == "error"){
                         document.getElementById('returnMsg').innerHTML = incomming.Level;
                     }
                 } else if (incomming.Name == opencvname) {
